@@ -44,7 +44,8 @@ export class OpenweatherService {
         timezone: res.timezone,
         timezone_offset: res.timezone_offset,
         updatedAt: new Date(),
-        data: { daily: res.daily, hourly: res.hourly },
+        daily: res.daily,
+        hourly: res.hourly
       };
 
       await this.db.collection<IClima>('AirZone').insertOne(newClima);
@@ -58,15 +59,15 @@ export class OpenweatherService {
 
         // Get weather new data
         let res = await this.climaRequestByCoords(lat, lon);
-        let updateData = { data: { daily: res.daily, hourly: res.hourly } };
 
         // Update document with new data
         await this.db
           .collection<IClima>('AirZone')
           .updateOne(
             { lat: res.lat, lon: res.lon },
-            { $set: { updatedAt: new Date(), updateData } },
+            { $set: { updatedAt: new Date(), daily: res.daily, hourly: res.hourly}  } 
           );
+          //TODO: return DB ibject
         return res;
       } else {
         console.log('Clima date OK');
@@ -89,11 +90,11 @@ export class OpenweatherService {
     // TODO: Comprobar si hoy se ha pedido fecha para lat y lon
     let res = await this.getClimaByCoords(lat, lon);
 
-    console.log(res);
+    // console.log(res);
 
     // TODO: Si se ha pedido, devolver entrada daily de hour. Si no, hacer peticion getClima y devolver entrada daily de hour
 
-    let hourRes = res.data.hourly.filter((entry: any) => {
+    let hourRes = res.hourly.filter((entry: any) => {
       // UNIX timestamp to ms
       console.log(new Date((entry.dt + res.timezone_offset) * 1000).getHours());
 
@@ -130,7 +131,7 @@ export class OpenweatherService {
    * @param clima
    */
   private isOutdated(clima: IClima) {
-    let diff = (new Date().getTime() - clima.updatedAt.getTime()) / 3600000; // to hours
+    let diff = (new Date().getTime() - clima.updatedAt.getTime()) / 3600000; // to hours    
     return diff > HOURS_THRESHOLD;
   }
 }

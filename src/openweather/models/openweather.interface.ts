@@ -6,8 +6,7 @@ export interface IClima extends Document {
   timezone: string;
   timezone_offset: number;
   updatedAt: Date;
-  data: {
+
     hourly: object[];
     daily: object[];
-  };
 }
