@@ -112,11 +112,11 @@ export class OpenweatherService {
    * @param lon
    * @returns weather data given coordinates
    */
-  private async climaRequestByCoords(lat: number, lon: number) {
+  async climaRequestByCoords(lat: number, lon: number) {
     try {
       let res = await this.httpService
         .get(
-          `${OPENWEATHER_ONECALL_URI}?lat=${lat}&lon=${lon}&exclude={current,minutely,alerts}&appid=${environment.API_KEY}`,
+          `${OPENWEATHER_ONECALL_URI}?lat=${lat}&lon=${lon}&exclude={current,minutely,alerts}&appid=${process.env.API_KEY}`,
         )
         .toPromise();
       // console.log(res.data);

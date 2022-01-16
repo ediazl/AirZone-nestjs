@@ -1,7 +1,7 @@
 import { HttpModule, Module } from '@nestjs/common';
-import { DbModule } from 'src/db/db.module';
-import { OpenweatherController } from './openweather.controller';
 import { OpenweatherService } from './openweather.service';
+import { OpenweatherController } from './openweather.controller';
+import { DbModule } from '../db/db.module';
 
 @Module({
   imports: [HttpModule, DbModule],

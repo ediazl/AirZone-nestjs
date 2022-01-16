@@ -1,13 +1,15 @@
 import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { OpenweatherService } from './openweather.service';
 
 @Controller('openweather')
+@ApiTags('openweather')
 export class OpenweatherController {
   constructor(private openweatherService: OpenweatherService) {}
 
   @Get('clima')
+  @ApiOperation({summary: 'Returns weather given lat and long '})
   async getClima(@Query('lat') lat: number, @Query('lon') lon: number) {
-    // let { lat, lon } = query;
     if (!lat || !lon) {
       throw new BadRequestException('Check that is supplied lat and lon');
     }
@@ -15,11 +17,10 @@ export class OpenweatherController {
     let res = await this.openweatherService.getClimaByCoords(lat, lon);
     delete res['_id']
     return res;
-    /*     console.log(lat, lon);
-    res.sendStatus(200); */
   }
 
   @Get('clima/hour')
+  @ApiOperation({summary: 'Returns weather given lat, long and future hour.'})
   async getClimaInHour(
     @Query('lat') lat: number,
     @Query('lon') lon: number,
@@ -36,8 +37,5 @@ export class OpenweatherController {
     let res = await this.openweatherService.getClimaByCoordsHour(lat, lon, hour);
     delete res['_id']
     return res;
-
-    /*     console.log(lat, lon);
-    res.sendStatus(200); */
   }
 }

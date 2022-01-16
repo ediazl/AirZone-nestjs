@@ -8,18 +8,14 @@ import { Db, MongoClient } from 'mongodb';
       provide: 'DATABASE_CONNECTION',
       useFactory: async (): Promise<Db> => {
         try {
-          try {
-            
-            const client = await MongoClient.connect(
-              `${environment.DB_URI}`,
-              );
-              console.log('Connected to DB');
-              return client.db('Openweather-nestjs');
-              
-            } catch (error) {
-              console.error('Cannot connect to DB');
-            }
+          const client = await MongoClient.connect(
+            `${environment.DB_URI}`,
+          );
+          console.log('Connected to DB');
+          return client.db('Openweather-nestjs');
+
         } catch (e) {
+          console.error('Cannot connect to DB');
           throw e;
         }
       },
