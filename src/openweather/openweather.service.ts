@@ -65,15 +65,15 @@ export class OpenweatherService {
           .collection<IClima>('AirZone')
           .updateOne(
             { lat: res.lat, lon: res.lon },
-            { $set: { updatedAt: new Date(), daily: res.daily, hourly: res.hourly}  } 
+            { $set: { updatedAt: new Date(), daily: res.daily, hourly: res.hourly}} 
           );
-          //TODO: return DB ibject
         return res;
       } else {
         console.log('Clima date OK');
         return clima;
       }
     }
+    
   }
 
   /**
@@ -116,7 +116,7 @@ export class OpenweatherService {
     try {
       let res = await this.httpService
         .get(
-          `${OPENWEATHER_ONECALL_URI}?lat=${lat}&lon=${lon}&exclude={current,minutely,alerts}&appid=${process.env.API_KEY}`,
+          `${OPENWEATHER_ONECALL_URI}?lat=${lat}&lon=${lon}&exclude={current,minutely,alerts}&appid=${environment.API_KEY}`,
         )
         .toPromise();
       // console.log(res.data);

@@ -55,12 +55,7 @@ sudo docker-compose up -d
 
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# WIP tests
+    "test": "cross-env NODE_ENV=DEV jest",
+    "test:watch": "cross-env NODE_ENV=DEV jest --watch",
 ```

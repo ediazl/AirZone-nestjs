@@ -15,7 +15,7 @@ export class OpenweatherController {
     }
 
     let res = await this.openweatherService.getClimaByCoords(lat, lon);
-    delete res['_id']
+    delete res['_id'];
     return res;
   }
 
