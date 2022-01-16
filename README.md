@@ -45,7 +45,10 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Lauch docker
+We have docker-compose in which are defined two services.
+run docker-compose build
+
 
 ```bash
 # unit tests

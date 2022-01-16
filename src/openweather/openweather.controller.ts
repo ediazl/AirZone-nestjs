@@ -12,8 +12,9 @@ export class OpenweatherController {
       throw new BadRequestException('Check that is supplied lat and lon');
     }
 
-    return await this.openweatherService.getClimaByCoords(lat, lon);
-
+    let res = await this.openweatherService.getClimaByCoords(lat, lon);
+    delete res['_id']
+    return res;
     /*     console.log(lat, lon);
     res.sendStatus(200); */
   }
@@ -32,7 +33,9 @@ export class OpenweatherController {
       throw new BadRequestException('Check hour values');
     }
 
-    return await this.openweatherService.getClimaByCoordsHour(lat, lon, hour);
+    let res = await this.openweatherService.getClimaByCoordsHour(lat, lon, hour);
+    delete res['_id']
+    return res;
 
     /*     console.log(lat, lon);
     res.sendStatus(200); */

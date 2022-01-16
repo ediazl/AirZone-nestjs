@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import environment from 'environment';
 import { Db, MongoClient } from 'mongodb';
 
 @Module({
@@ -8,7 +9,7 @@ import { Db, MongoClient } from 'mongodb';
       useFactory: async (): Promise<Db> => {
         try {
           const client = await MongoClient.connect(
-            'mongodb://localhost:27017/AirZone?maxPoolSize=20&w=majority',
+           `${environment.DB_URI}`,
           );
           return client.db('app-test');
         } catch (e) {
