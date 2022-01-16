@@ -3,10 +3,4 @@ export interface EnvironmentDto {
   API_KEY: string;
   port: number;
   hostname: string;
-  swaggerConfig: {
-    prefix: string;
-    username: string;
-    password: string;
-    swaggerDocumentFile: string;
-  };
 }

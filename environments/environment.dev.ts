@@ -10,10 +10,4 @@ export const environmentDev: EnvironmentDto = {
   API_KEY: '58fe0c7b76b9fd6b0e5005c85ec22ac6',
   port: 3001,
   hostname: 'localhost',
-  swaggerConfig: {
-    prefix: 'docs',
-    username: 'root',
-    password: 'root',
-    swaggerDocumentFile: 'swagger.json',
-  },
 };
